@@ -3,10 +3,11 @@ import Accordion from "./Accordion";
 import AppContext from "../context/AppContext";
 
 export default function Content({ type, title, children }) {
-  const { setSelectedPost } = useContext(AppContext);
+  const { setSelectedPost, openPost, setOpenPost } = useContext(AppContext);
 
   function selectedFunction() {
     setSelectedPost(title);
+    setOpenPost([...openPost, title]);
   }
   return type === "directory" ? (
     <Accordion title={`📂${title}`}>
