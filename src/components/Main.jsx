@@ -13,23 +13,23 @@ export default function Main() {
   const listArr = [
     {
       icon: <VscFiles size={32} opacity={0.8} />,
-      path: "post",
+      path: "EXPLORER",
     },
     {
       icon: <VscSearch size={32} />,
-      path: "test",
+      path: "SEARCH",
     },
     {
       icon: <VscSourceControl size={32} />,
-      path: "test",
+      path: "POSTING LOG",
     },
     {
       icon: <VscDebugAlt size={32} />,
-      path: "test",
+      path: "RUN AND DEBUG",
     },
     {
       icon: <VscExtensions size={32} />,
-      path: "test",
+      path: "EXTENSIONS",
     },
   ];
   const [selected, setSelected] = useState(null);
@@ -48,10 +48,12 @@ export default function Main() {
           </IconWrap>
         ))}
       </LeftBar>
-      <LeftContent>
-        <p>{listArr[selected]?.path}</p>
-        <Accordion title="OPEN POSTS"></Accordion>
-      </LeftContent>
+      {selected != null && listArr[selected] && (
+        <LeftContent>
+          <p>{listArr[selected]?.path}</p>
+          <Accordion title="OPEN POSTS">text</Accordion>
+        </LeftContent>
+      )}
     </Wrap>
   );
 }
@@ -86,7 +88,8 @@ const LeftContent = styled.div`
   height: 100%;
   background-color: #252526;
   > p {
-    padding: 15px 0 0 10px;
+    user-select: none;
+    padding: 10px;
     color: #7a7a7a;
   }
 `;
