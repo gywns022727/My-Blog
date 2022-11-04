@@ -5,11 +5,11 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Main from "./components/Main";
+import Page from "./components/Page";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Main />}>
+    <Route path="/" element={<Page />}>
       {/* <Route path="dashboard" element={<Dashboard />} />
       ... etc. */}
     </Route>
