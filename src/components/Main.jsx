@@ -7,6 +7,7 @@ import {
   VscDebugAlt,
   VscExtensions,
 } from "react-icons/vsc";
+import Accordion from "./Accordion";
 
 export default function Main() {
   const listArr = [
@@ -40,7 +41,7 @@ export default function Main() {
           <IconWrap
             selected={selected === index}
             onClick={() => {
-              setSelected(index);
+              setSelected(selected === index ? null : index);
             }}
           >
             {one.icon}
@@ -49,6 +50,7 @@ export default function Main() {
       </LeftBar>
       <LeftContent>
         <p>{listArr[selected]?.path}</p>
+        <Accordion title="OPEN POSTS"></Accordion>
       </LeftContent>
     </Wrap>
   );
@@ -72,6 +74,8 @@ const IconWrap = styled.div`
   justify-content: center;
   cursor: pointer;
 
+  border-left: ${({ selected }) => (selected ? 2 : 0)}px solid white;
+
   > svg {
     color: ${({ selected }) => (selected ? "white" : "#7a7a7a")};
   }
@@ -82,6 +86,7 @@ const LeftContent = styled.div`
   height: 100%;
   background-color: #252526;
   > p {
+    padding: 15px 0 0 10px;
     color: #7a7a7a;
   }
 `;
