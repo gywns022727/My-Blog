@@ -19,10 +19,10 @@ export default function Main() {
           <Accordion title="OPEN POSTS">📂text</Accordion>
           <Accordion title="KSCODE">
             <Accordion title="📂KSCODE">
-              &nbsp;&nbsp;&nbsp;&nbsp;📝text
+              &nbsp;&nbsp;&nbsp;&nbsp;📝<Blod>text</Blod>
             </Accordion>
             <Accordion title="📂KSCODE">
-              &nbsp;&nbsp;&nbsp;&nbsp;📝text
+              &nbsp;&nbsp;&nbsp;&nbsp;📝<Blod>text</Blod>
             </Accordion>
           </Accordion>
         </>
@@ -81,6 +81,10 @@ const Wrap = styled.div`
   /* flex-direction: column; */
   height: 100vh;
   background-color: #1e1e1e;
+`;
+
+const Blod = styled.span`
+  font-weight: bold;
 `;
 
 const LeftBar = styled.div`
