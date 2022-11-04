@@ -6,7 +6,9 @@ export default function Footer() {
 }
 
 const FooterWrap = styled.div`
-  height: 25px;
-  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  height: 3vh;
   background-color: #007fd4;
 `;

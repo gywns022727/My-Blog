@@ -9,21 +9,56 @@ import {
 } from "react-icons/vsc";
 import Accordion from "./Accordion";
 
+const tempData = [
+  {
+    type: "directory",
+    title: "일상",
+  },
+  {
+    type: "directory",
+    title: "Tech",
+    children: [
+      {
+        type: "post",
+        title: "Tech1",
+      },
+      {
+        type: "post",
+        title: "Tech2",
+      },
+      {
+        type: "directory",
+        title: "Tech3",
+        children: [
+          {
+            type: "post",
+            title: "Tech31",
+          },
+          {
+            type: "post",
+            title: "Tech32",
+          },
+        ],
+      },
+    ],
+  },
+];
+
 export default function Main() {
+  const [selected, setSelected] = useState(null);
   const listArr = [
     {
       icon: <VscFiles size={32} opacity={0.8} />,
       path: "EXPLORER",
       content: (
         <>
-          <Accordion title="OPEN POSTS">📂text</Accordion>
-          <Accordion title="KSCODE">
-            <Accordion title="📂KSCODE">
-              &nbsp;&nbsp;&nbsp;&nbsp;📝<Blod>text</Blod>
-            </Accordion>
-            <Accordion title="📂KSCODE">
-              &nbsp;&nbsp;&nbsp;&nbsp;📝<Blod>text</Blod>
-            </Accordion>
+          <Accordion title="OPEN POSTS" isBold={true}>
+            내요요요옹
+          </Accordion>
+          <Accordion title="VSCODE" isBold={true}>
+            {tempData.map((one) => (
+              <Content {...one} />
+            ))}
           </Accordion>
         </>
       ),
@@ -49,11 +84,9 @@ export default function Main() {
       content: <Accordion title="EXTENSIONS">text</Accordion>,
     },
   ];
-  const [selected, setSelected] = useState(null);
 
   return (
     <Wrap>
-      {/* <Header /> */}
       <LeftBar>
         {listArr.map((one, index) => (
           <IconWrap
@@ -66,7 +99,8 @@ export default function Main() {
           </IconWrap>
         ))}
       </LeftBar>
-      {selected != null && listArr[selected] && (
+
+      {selected !== null && listArr[selected] && (
         <LeftContent>
           <p>{listArr[selected].path}</p>
           {listArr[selected].content}
@@ -76,15 +110,22 @@ export default function Main() {
   );
 }
 
+function Content({ type, title, children }) {
+  return type === "directory" ? (
+    <Accordion title={`📂${title}`}>
+      {children?.map((one) => (
+        <Content {...one} />
+      ))}
+    </Accordion>
+  ) : (
+    <div>&nbsp;&nbsp;&nbsp;&nbsp;📝{title}</div>
+  );
+}
+
 const Wrap = styled.div`
   display: flex;
-  /* flex-direction: column; */
   height: 100vh;
   background-color: #1e1e1e;
-`;
-
-const Blod = styled.span`
-  font-weight: bold;
 `;
 
 const LeftBar = styled.div`

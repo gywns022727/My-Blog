@@ -6,7 +6,7 @@ export default function Header() {
 }
 
 const HeaderWrap = styled.div`
-  height: 25px;
-  z-index: 10;
+  width: 100vw;
+  height: 3vh;
   background-color: #3c3c3c;
 `;
