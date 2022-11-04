@@ -47,11 +47,15 @@ export default function Main() {
           </IconWrap>
         ))}
       </LeftBar>
+      <LeftContent>
+        <p>{listArr[selected]?.path}</p>
+      </LeftContent>
     </Wrap>
   );
 }
 
 const Wrap = styled.div`
+  display: flex;
   height: 100vh;
   background-color: #1e1e1e;
 `;
@@ -70,5 +74,14 @@ const IconWrap = styled.div`
 
   > svg {
     color: ${({ selected }) => (selected ? "white" : "#7a7a7a")};
+  }
+`;
+
+const LeftContent = styled.div`
+  width: 320px;
+  height: 100%;
+  background-color: #252526;
+  > p {
+    color: #7a7a7a;
   }
 `;
