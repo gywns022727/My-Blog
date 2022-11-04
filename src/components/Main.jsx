@@ -8,6 +8,7 @@ import {
   VscExtensions,
 } from "react-icons/vsc";
 import Accordion from "./Accordion";
+import Content from "./content";
 
 const tempData = [
   {
@@ -106,19 +107,8 @@ export default function Main() {
           {listArr[selected].content}
         </LeftContent>
       )}
+      <RightContent>hihi</RightContent>
     </Wrap>
-  );
-}
-
-function Content({ type, title, children }) {
-  return type === "directory" ? (
-    <Accordion title={`📂${title}`}>
-      {children?.map((one) => (
-        <Content {...one} />
-      ))}
-    </Accordion>
-  ) : (
-    <div>&nbsp;&nbsp;&nbsp;&nbsp;📝{title}</div>
   );
 }
 
@@ -129,7 +119,7 @@ const Wrap = styled.div`
 `;
 
 const LeftBar = styled.div`
-  width: 50px;
+  min-width: 50px;
   height: 100%;
   background-color: rgb(51 51 51);
 `;
@@ -157,4 +147,9 @@ const LeftContent = styled.div`
     padding-bottom: 10px;
     color: #7a7a7a;
   }
+`;
+
+const RightContent = styled.div`
+  width: 100%;
+  background-color: #1e1e1e;
 `;
