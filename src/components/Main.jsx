@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import {
   VscFiles,
@@ -8,7 +8,8 @@ import {
   VscExtensions,
 } from "react-icons/vsc";
 import Accordion from "./Accordion";
-import Content from "./content";
+import Content from "./Content";
+import AppContext from "../context/AppContext";
 
 const tempData = [
   {
@@ -47,6 +48,8 @@ const tempData = [
 
 export default function Main() {
   const [selected, setSelected] = useState(null);
+  const { selectedPost } = useContext(AppContext);
+
   const listArr = [
     {
       icon: <VscFiles size={32} opacity={0.8} />,
@@ -57,8 +60,8 @@ export default function Main() {
             내요요요옹
           </Accordion>
           <Accordion title="VSCODE" isBold={true}>
-            {tempData.map((one) => (
-              <Content {...one} />
+            {tempData.map((one, index) => (
+              <Content {...one} key={index} />
             ))}
           </Accordion>
         </>
@@ -95,6 +98,7 @@ export default function Main() {
             onClick={() => {
               setSelected(selected === index ? null : index);
             }}
+            key={index}
           >
             {one.icon}
           </IconWrap>
@@ -107,7 +111,7 @@ export default function Main() {
           {listArr[selected].content}
         </LeftContent>
       )}
-      <RightContent>hihi</RightContent>
+      <RightContent>{selectedPost}</RightContent>
     </Wrap>
   );
 }

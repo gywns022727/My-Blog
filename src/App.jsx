@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 // import Page from "./components/Page";
 import Page from "./components/pages/Page";
-import ThemeContext from "./context/context";
+import AppContext from "./context/AppContext";
 import { useState } from "react";
 
 const router = createBrowserRouter(
@@ -21,16 +21,16 @@ const router = createBrowserRouter(
 );
 
 function App() {
-  const [selectedPost, setSelectesPost] = useState("");
+  const [selectedPost, setSelectedPost] = useState("");
   return (
-    <ThemeContext.Provider
+    <AppContext.Provider
       value={{
         selectedPost: selectedPost,
-        setSelectesPost: setSelectesPost,
+        setSelectedPost: setSelectedPost,
       }}
     >
       <RouterProvider router={router} />
-    </ThemeContext.Provider>
+    </AppContext.Provider>
   );
 }
 
