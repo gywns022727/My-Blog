@@ -6,6 +6,7 @@ import {
   VscSourceControl,
   VscDebugAlt,
   VscExtensions,
+  VscChromeClose,
 } from "react-icons/vsc";
 import Accordion from "./Accordion";
 import Content from "./Content";
@@ -13,7 +14,8 @@ import AppContext from "../context/AppContext";
 
 export default function Main() {
   const [selected, setSelected] = useState(null);
-  const { selectedPost, postData, openPost } = useContext(AppContext);
+  const { setSelectedPost, setOpenPost, selectedPost, postData, openPost } =
+    useContext(AppContext);
 
   const listArr = [
     {
@@ -75,9 +77,9 @@ export default function Main() {
           {listArr[selected].content}
         </LeftContent>
       )}
-      <RightContent selected={selected}>
-        <div>
-          {openPost.map((one) => {
+      <RightWrap selected={selected}>
+        <RightHeader>
+          {openPost.map((one, index) => {
             const pathArr = one.split("/").filter(Boolean);
 
             const data = pathArr.reduce((sum, current, index) => {
@@ -91,14 +93,34 @@ export default function Main() {
               return lastPath ? target : target?.children;
             }, postData);
             return (
-              <div className={selectedPost === one ? "selected" : ""}>
-                {data.title}
+              <div
+                className={selectedPost === one ? "selected" : ""}
+                onClick={() => {
+                  setSelectedPost(data.path);
+                }}
+                key={index}
+              >
+                📝{data.title}
+                <span
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const openPostFilter = openPost.filter(
+                      (one) => one !== data.path
+                    );
+                    setOpenPost(openPostFilter);
+                    setSelectedPost(
+                      openPostFilter.length !== 0 ? openPostFilter[0] : null
+                    );
+                  }}
+                >
+                  <VscChromeClose />
+                </span>
               </div>
             );
           })}
-        </div>
-        {selectedPost}
-      </RightContent>
+        </RightHeader>
+        <RightContent>{selectedPost}</RightContent>
+      </RightWrap>
     </Wrap>
   );
 }
@@ -129,7 +151,7 @@ const IconWrap = styled.div`
 `;
 
 const LeftContent = styled.div`
-  width: 320px;
+  width: 350px;
   height: 100%;
   background-color: #252526;
   padding: 10px;
@@ -143,34 +165,53 @@ const LeftContent = styled.div`
   }
 `;
 
-const RightContent = styled.div`
-  width: 100%;
-  background-color: #1e1e1e;
+const RightWrap = styled.div`
+  width: ${({ selected }) =>
+    selected === null ? "calc(100% - 50px)" : "calc(100% - 320px - 50px)"};
   @media (max-width: 540px) {
     display: ${({ selected }) => (selected === null ? "block" : "none")};
   }
+`;
 
-  > div:first-child {
-    display: flex;
-    background-color: #252526;
-    > div {
-      width: 150px;
-      height: 40px;
-      font-size: 16px;
-      text-align: center;
-      /* text-overflow: ellipsis; */
-      padding: 10px;
-      background-color: #333;
-      border-right: 1px solid #252525;
-      &.selected {
-        font-weight: bold;
-        background-color: #1e1e1e;
-        border-right: 1px solid #1e1e1e;
-      }
-      &:not(.selected) {
-        color: #1e1e1e;
-        border-right: 1px solid #252526;
-      }
+const RightHeader = styled.div`
+  width: 100%;
+  height: 40px;
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  background-color: #252526;
+  > div {
+    width: 150px;
+    min-width: 150px;
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+    /* text-overflow: ellipsis; */
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+    padding: 10px;
+    background-color: #333;
+    border-right: 1px solid #252525;
+    &.selected {
+      font-weight: bold;
+      background-color: #1e1e1e;
+      border-right: 1px solid #1e1e1e;
+    }
+    &:not(.selected) {
+      color: #1e1e1e;
+      border-right: 1px solid #252526;
+    }
+    > span {
+      position: absolute;
+      top: 12px;
+      right: 15px;
     }
   }
+`;
+
+const RightContent = styled.div`
+  width: 100%;
+  height: calc(100% - 50px);
+  background-color: #1e1e1e;
 `;
