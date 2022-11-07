@@ -38,10 +38,12 @@ function App() {
           {
             type: "post",
             title: "Tech1",
+            path: "/Tech/Tech1",
           },
           {
             type: "post",
             title: "Tech2",
+            path: "/Tech/Tech2",
           },
           {
             type: "directory",
@@ -50,10 +52,12 @@ function App() {
               {
                 type: "post",
                 title: "Tech31",
+                path: "/Tech/Tech3/Tech31",
               },
               {
                 type: "post",
                 title: "Tech32",
+                path: "/Tech/Tech3/Tech32",
               },
             ],
           },

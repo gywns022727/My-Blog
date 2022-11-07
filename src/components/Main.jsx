@@ -76,7 +76,7 @@ export default function Main() {
           {listArr[selected].content}
         </LeftContent>
       )}
-      <RightContent>
+      <RightContent selected={selected}>
         {JSON.stringify(openPost)}
         {selectedPost}
       </RightContent>
@@ -119,9 +119,15 @@ const LeftContent = styled.div`
     padding-bottom: 10px;
     color: #7a7a7a;
   }
+  @media (max-width: 540px) {
+    width: 100%;
+  }
 `;
 
 const RightContent = styled.div`
   width: 100%;
   background-color: #1e1e1e;
+  @media (max-width: 540px) {
+    display: ${({ selected }) => (selected === null ? "block" : "none")};
+  }
 `;

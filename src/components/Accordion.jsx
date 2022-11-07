@@ -14,7 +14,11 @@ export default function Accordion({ title, children }) {
         {expanded ? <VscChevronDown /> : <VscChevronRight />}
         <span>{title}</span>
       </AccordionWrap>
-      {expanded && <AccordionContentWrap>{children}</AccordionContentWrap>}
+      {
+        <AccordionContentWrap expanded={expanded}>
+          {children}
+        </AccordionContentWrap>
+      }
     </>
   );
 }

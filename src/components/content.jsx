@@ -2,12 +2,15 @@ import React, { useContext } from "react";
 import Accordion from "./Accordion";
 import AppContext from "../context/AppContext";
 
-export default function Content({ type, title, children }) {
+export default function Content({ type, title, children, path }) {
   const { setSelectedPost, openPost, setOpenPost } = useContext(AppContext);
 
   function selectedFunction() {
     setSelectedPost(title);
-    setOpenPost([...openPost, title]);
+
+    if (openPost.includes(path)) {
+      setOpenPost([...openPost, title]);
+    }
   }
   return type === "directory" ? (
     <Accordion title={`📂${title}`}>
