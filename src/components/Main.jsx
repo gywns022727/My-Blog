@@ -69,7 +69,6 @@ export default function Main() {
           </IconWrap>
         ))}
       </LeftBar>
-
       {selected !== null && listArr[selected] && (
         <LeftContent>
           <p>{listArr[selected].path}</p>
@@ -77,7 +76,23 @@ export default function Main() {
         </LeftContent>
       )}
       <RightContent selected={selected}>
-        {JSON.stringify(openPost)}
+        <div>
+          {openPost.map((one) => {
+            const pathArr = one.split("/").filter(Boolean);
+
+            const data = pathArr.reduce((sum, current, index) => {
+              const lastPath = pathArr.length - 1 === index;
+
+              const target = sum.find(
+                (one) =>
+                  one.title === current &&
+                  one.type === (lastPath ? "post" : "directory")
+              );
+              return lastPath ? target : target?.children;
+            }, postData);
+            return <div>{data.title}</div>;
+          })}
+        </div>
         {selectedPost}
       </RightContent>
     </Wrap>
@@ -129,5 +144,19 @@ const RightContent = styled.div`
   background-color: #1e1e1e;
   @media (max-width: 540px) {
     display: ${({ selected }) => (selected === null ? "block" : "none")};
+  }
+
+  > div:first-child {
+    display: flex;
+    background-color: #252526;
+    > div {
+      width: 150px;
+      height: 40px;
+      text-align: center;
+      /* text-overflow: ellipsis; */
+      padding: 10px;
+      background-color: #1e1e1e;
+      border-right: 2px solid #252526;
+    }
   }
 `;

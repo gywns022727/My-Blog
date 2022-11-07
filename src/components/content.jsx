@@ -8,8 +8,8 @@ export default function Content({ type, title, children, path }) {
   function selectedFunction() {
     setSelectedPost(title);
 
-    if (openPost.includes(path)) {
-      setOpenPost([...openPost, title]);
+    if (!openPost.includes(path)) {
+      setOpenPost([...openPost, path]);
     }
   }
   return type === "directory" ? (
