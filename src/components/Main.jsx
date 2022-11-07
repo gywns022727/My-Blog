@@ -90,7 +90,11 @@ export default function Main() {
               );
               return lastPath ? target : target?.children;
             }, postData);
-            return <div>{data.title}</div>;
+            return (
+              <div className={selectedPost === one ? "selected" : ""}>
+                {data.title}
+              </div>
+            );
           })}
         </div>
         {selectedPost}
@@ -152,11 +156,21 @@ const RightContent = styled.div`
     > div {
       width: 150px;
       height: 40px;
+      font-size: 16px;
       text-align: center;
       /* text-overflow: ellipsis; */
       padding: 10px;
-      background-color: #1e1e1e;
-      border-right: 2px solid #252526;
+      background-color: #333;
+      border-right: 1px solid #252525;
+      &.selected {
+        font-weight: bold;
+        background-color: #1e1e1e;
+        border-right: 1px solid #1e1e1e;
+      }
+      &:not(.selected) {
+        color: #1e1e1e;
+        border-right: 1px solid #252526;
+      }
     }
   }
 `;
