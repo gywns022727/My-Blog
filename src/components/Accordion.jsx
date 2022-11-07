@@ -40,7 +40,12 @@ const AccordionWrap = styled.div`
 `;
 
 const AccordionContentWrap = styled.div`
+  max-height: ${({ expanded }) => (expanded ? "500px" : "0")};
+  overflow: hidden;
+  transition: ${({ expanded }) =>
+    expanded ? "max-height 0.25s ease-in" : "max-height 0.15s ease-out"};
+
   user-select: none;
   cursor: pointer;
-  padding: 0 0 5px 15px;
+  margin: 0 0 5px 15px;
 `;
