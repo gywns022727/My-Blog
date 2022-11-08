@@ -20,11 +20,20 @@ export default function PostWrap({ path, title, isClose }) {
       onClick={selectedFunction}
       className={selectedPost === path ? "selected" : ""}
     >
-      &nbsp;&nbsp;
-      <span className={isClose && selectedPost === path ? "visible" : ""}>
+      <span
+        className={isClose && selectedPost === path ? "visible" : ""}
+        onClick={(e) => {
+          e.stopPropagation();
+          const openPostFilter = openPost.filter((one) => one !== path);
+          setOpenPost(openPostFilter);
+          setSelectedPost(
+            openPostFilter.length !== 0 ? openPostFilter[0] : null
+          );
+        }}
+      >
         <VscChromeClose />
       </span>
-      &nbsp;&nbsp;📝{title}
+      &nbsp;&nbsp; &nbsp;&nbsp;📝{title}
     </PostWrapStyled>
   );
 }
@@ -32,14 +41,22 @@ export default function PostWrap({ path, title, isClose }) {
 const PostWrapStyled = styled.div`
   cursor: pointer;
   padding: 5px 0;
+  position: relative;
   &:not(.selected):hover {
     background-color: #3c3c3c;
   }
   &.selected {
     background-color: #505050;
   }
+  &:hover > span {
+    display: block;
+  }
   > span {
     display: none;
+    top: 8px;
+    left: 3px;
+    position: absolute;
+
     &.visible {
       display: block;
     }
