@@ -12,6 +12,7 @@ import Accordion from "./Accordion";
 import Content from "./Content";
 import AppContext from "../context/AppContext";
 import { getPostOne } from "../common/common.function";
+import PostWrap from "./PostWrap";
 
 export default function Main() {
   const [selected, setSelected] = useState(null);
@@ -24,12 +25,16 @@ export default function Main() {
       path: "EXPLORER",
       content: (
         <>
-          <Accordion title="OPEN POSTS" isBold={true}>
-            {openPost.map((one) => (
-              <div>{getPostOne(postData, one).title}</div>
-            ))}
+          <Accordion title="OPEN POSTS" isBold={true} initialExpanded={true}>
+            {openPost.map((one, index) => {
+              const data = getPostOne(postData, one);
+
+              return (
+                <PostWrap path={data.path} title={data.title} key={index} />
+              );
+            })}
           </Accordion>
-          <Accordion title="VSCODE" isBold={true}>
+          <Accordion title="VSCODE" isBold={true} initialExpanded={true}>
             {postData.map((one, index) => (
               <Content {...one} key={index} />
             ))}
@@ -83,18 +88,7 @@ export default function Main() {
       <RightWrap selected={selected}>
         <RightHeader>
           {openPost.map((one, index) => {
-            const pathArr = one.split("/").filter(Boolean);
-
-            const data = pathArr.reduce((sum, current, index) => {
-              const lastPath = pathArr.length - 1 === index;
-
-              const target = sum.find(
-                (one) =>
-                  one.title === current &&
-                  one.type === (lastPath ? "post" : "directory")
-              );
-              return lastPath ? target : target?.children;
-            }, postData);
+            const data = getPostOne(postData, one);
             return (
               <div
                 className={selectedPost === one ? "selected" : ""}
