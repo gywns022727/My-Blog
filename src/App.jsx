@@ -5,10 +5,12 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-// import Page from "./components/Page";
 import Page from "./components/pages/Page";
 import AppContext from "./context/AppContext";
 import { useEffect, useState } from "react";
+import { ThemeProvider } from "styled-components";
+import { darkTheme } from "./style/theme";
+import { GlobalStyle } from "./style/GlobalStyle";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -76,7 +78,10 @@ function App() {
         postData: postData,
       }}
     >
-      <RouterProvider router={router} />
+      <ThemeProvider theme={darkTheme}>
+        <GlobalStyle />
+        <RouterProvider router={router} />
+      </ThemeProvider>
     </AppContext.Provider>
   );
 }

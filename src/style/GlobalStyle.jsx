@@ -1,3 +1,6 @@
+import { createGlobalStyle } from "styled-components";
+
+export const GlobalStyle = createGlobalStyle`
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +8,7 @@
 }
 
 *:not(svg, path) {
-    color: white;
+    color: ${({ theme }) => theme.color.text};
 }
 
 body {
@@ -34,6 +37,7 @@ code {
 }
 
 *::-webkit-scrollbar-track {
-    background: #1e1e1e;
+    background: ${({ theme }) => theme.color.primary};
     /*스크롤바 뒷 배경 색상*/
 }
+`;

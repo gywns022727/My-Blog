@@ -43,10 +43,10 @@ const PostWrapStyled = styled.div`
   padding: 5px 0;
   position: relative;
   &:not(.selected):hover {
-    background-color: #3c3c3c;
+    background-color: ${({ theme }) => theme.color.hover};
   }
   &.selected {
-    background-color: #505050;
+    background-color: ${({ theme }) => theme.color.selected};
   }
   &:hover > span {
     display: block;
@@ -62,7 +62,8 @@ const PostWrapStyled = styled.div`
     }
   }
   &:hover {
-    background-color: #3c3c3c;
+    background-color: ${({ theme }) => theme.color.hover};
   }
-  background-color: ${({ selected }) => (selected ? "#505050" : "")};
+  background-color: ${({ selected, theme }) =>
+    selected ? `${theme.color.selected}` : ""};
 `;

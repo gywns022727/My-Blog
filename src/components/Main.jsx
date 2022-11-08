@@ -130,13 +130,13 @@ export default function Main() {
 const Wrap = styled.div`
   display: flex;
   height: 100vh;
-  background-color: #1e1e1e;
+  background-color: ${({ theme }) => theme.color.primary};
 `;
 
 const LeftBar = styled.div`
   min-width: 50px;
   height: 100%;
-  background-color: rgb(51 51 51);
+  background-color: ${({ theme }) => theme.color.third};
 `;
 
 const IconWrap = styled.div`
@@ -145,22 +145,24 @@ const IconWrap = styled.div`
   justify-content: center;
   cursor: pointer;
 
-  border-left: ${({ selected }) => (selected ? 2 : 0)}px solid white;
+  border-left: ${({ selected, theme }) =>
+    `${selected ? 2 : 0}px solid ${theme.color.text}}`};
 
   > svg {
-    color: ${({ selected }) => (selected ? "white" : "#7a7a7a")};
+    color: ${({ selected, theme }) =>
+      `${selected ? `${theme.color.text}` : `${theme.color.textTwo}`}`};
   }
 `;
 
 const LeftContent = styled.div`
   width: 320px;
   height: 100%;
-  background-color: #252526;
+  background-color: ${({ theme }) => theme.color.secondary};
   padding: 10px;
   > p {
     user-select: none;
     padding-bottom: 10px;
-    color: #7a7a7a;
+    color: ${({ theme }) => theme.color.textTwo};
   }
   @media (max-width: 540px) {
     width: 100%;
@@ -181,7 +183,7 @@ const RightHeader = styled.div`
   display: flex;
   overflow-y: hidden;
   overflow-x: scroll;
-  background-color: #252526;
+  background-color: ${({ theme }) => theme.color.secondary};
   ::-webkit-scrollbar-thumb {
     display: none;
   }
@@ -200,16 +202,16 @@ const RightHeader = styled.div`
     cursor: pointer;
     position: relative;
     padding: 10px;
-    background-color: #333;
-    border-right: 1px solid #252525;
+    background-color: ${({ theme }) => theme.color.third};
+    border-right: 1px solid ${({ theme }) => theme.color.third};
     &.selected {
       font-weight: bold;
-      background-color: #1e1e1e;
-      border-right: 1px solid #1e1e1e;
+      background-color: ${({ theme }) => theme.color.primary};
+      border-right: 1px solid ${({ theme }) => theme.color.primary};
     }
     &:not(.selected) {
-      color: #1e1e1e;
-      border-right: 1px solid #252526;
+      color: ${({ theme }) => theme.color.contentColor};
+      border-right: 1px solid ${({ theme }) => theme.color.secondary};
     }
     &:not(.selected) > span {
       display: none;
@@ -228,5 +230,5 @@ const RightHeader = styled.div`
 const RightContent = styled.div`
   width: 100%;
   height: calc(100% - 50px);
-  background-color: #1e1e1e;
+  background-color: ${({ theme }) => theme.color.primary};
 `;

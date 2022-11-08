@@ -10,5 +10,5 @@ const FooterWrap = styled.div`
   bottom: 0;
   width: 100vw;
   height: 3vh;
-  background-color: #007fd4;
+  background-color: ${({ theme }) => theme.color.footer};
 `;

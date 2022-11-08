@@ -26,7 +26,6 @@ export default function Accordion({ title, children, initialExpanded }) {
 const AccordionWrap = styled.div`
   display: flex;
   align-items: center;
-  color: white;
   font-weight: bold;
   font-size: 1rem;
   padding-left: 5px;
@@ -34,7 +33,7 @@ const AccordionWrap = styled.div`
   user-select: none;
   padding: 5px 0;
   &:hover {
-    background-color: #3c3c3c;
+    background-color: ${({ theme }) => theme.color.hover};
   }
   > span {
     padding-left: 5px;
