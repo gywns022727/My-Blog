@@ -6,7 +6,7 @@ export const darkTheme = {
     contentColor: "#1e1e1e",
     header: "#3c3c3c",
     footer: "#007fd4",
-
+    scroll: "#cecece",
     selected: "#505050",
     hover: "#3c3c3c",
     text: "white",
@@ -21,7 +21,7 @@ export const darkTheme = {
 //   contentColor: "#1e1e1e",
 //   header: "#3c3c3c",
 //   footer: "#007fd4",
-
+//   scroll: "#cecece",
 //   selected: "#505050",
 //   hover: "#3c3c3c",
 //   text: "white",

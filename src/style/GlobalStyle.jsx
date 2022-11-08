@@ -31,7 +31,7 @@ code {
 *::-webkit-scrollbar-thumb {
     height: 10%;
     /* 스크롤바의 길이 */
-    background: rgb(206, 206, 206);
+    background: ${({ theme }) => theme.color.scroll};
     /* 스크롤바의 색상 */
     border-radius: 10px;
 }
