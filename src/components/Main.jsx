@@ -11,6 +11,7 @@ import {
 import Accordion from "./Accordion";
 import Content from "./Content";
 import AppContext from "../context/AppContext";
+import { getPostOne } from "../common/common.function";
 
 export default function Main() {
   const [selected, setSelected] = useState(null);
@@ -24,7 +25,9 @@ export default function Main() {
       content: (
         <>
           <Accordion title="OPEN POSTS" isBold={true}>
-            내요요요옹
+            {openPost.map((one) => (
+              <div>{getPostOne(postData, one).title}</div>
+            ))}
           </Accordion>
           <Accordion title="VSCODE" isBold={true}>
             {postData.map((one, index) => (

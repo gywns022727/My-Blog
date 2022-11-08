@@ -33,7 +33,9 @@ const AccordionWrap = styled.div`
   cursor: pointer;
   user-select: none;
   padding: 5px 0;
-
+  &:hover {
+    background-color: #3c3c3c;
+  }
   > span {
     padding-left: 5px;
   }
