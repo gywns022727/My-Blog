@@ -20,6 +20,7 @@ code {
 }
 
 *::-webkit-scrollbar {
+    width: 5px;
     height: 5px;
     /* 스크롤바의 너비 */
 }
@@ -27,7 +28,7 @@ code {
 *::-webkit-scrollbar-thumb {
     height: 10%;
     /* 스크롤바의 길이 */
-    background: #333;
+    background: rgb(206, 206, 206);
     /* 스크롤바의 색상 */
     border-radius: 10px;
 }

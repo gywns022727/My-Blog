@@ -30,7 +30,12 @@ export default function Main() {
               const data = getPostOne(postData, one);
 
               return (
-                <PostWrap path={data.path} title={data.title} key={index} />
+                <PostWrap
+                  path={data.path}
+                  title={data.title}
+                  isClose={true}
+                  key={index}
+                />
               );
             })}
           </Accordion>
@@ -148,7 +153,7 @@ const IconWrap = styled.div`
 `;
 
 const LeftContent = styled.div`
-  width: 350px;
+  width: 320px;
   height: 100%;
   background-color: #252526;
   padding: 10px;
@@ -177,12 +182,19 @@ const RightHeader = styled.div`
   overflow-y: hidden;
   overflow-x: scroll;
   background-color: #252526;
+  ::-webkit-scrollbar-thumb {
+    display: none;
+  }
+  &:hover::-webkit-scrollbar-thumb {
+    display: block;
+  }
   > div {
     width: 150px;
     min-width: 150px;
     height: 40px;
     font-size: 16px;
     text-align: center;
+    line-height: 15px;
     /* text-overflow: ellipsis; */
     user-select: none;
     cursor: pointer;
@@ -198,6 +210,12 @@ const RightHeader = styled.div`
     &:not(.selected) {
       color: #1e1e1e;
       border-right: 1px solid #252526;
+    }
+    &:not(.selected) > span {
+      display: none;
+    }
+    &:hover > span {
+      display: block;
     }
     > span {
       position: absolute;

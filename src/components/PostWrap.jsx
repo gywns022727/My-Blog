@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import AppContext from "../context/AppContext";
+import { VscChromeClose } from "react-icons/vsc";
 
-export default function PostWrap({ path, title }) {
+export default function PostWrap({ path, title, isClose }) {
   const { selectedPost, setSelectedPost, openPost, setOpenPost } =
     useContext(AppContext);
 
@@ -19,7 +20,11 @@ export default function PostWrap({ path, title }) {
       onClick={selectedFunction}
       className={selectedPost === path ? "selected" : ""}
     >
-      &nbsp;&nbsp;&nbsp;&nbsp;📝{title}
+      &nbsp;&nbsp;
+      <span className={isClose && selectedPost === path ? "visible" : ""}>
+        <VscChromeClose />
+      </span>
+      &nbsp;&nbsp;📝{title}
     </PostWrapStyled>
   );
 }
@@ -32,6 +37,12 @@ const PostWrapStyled = styled.div`
   }
   &.selected {
     background-color: #505050;
+  }
+  > span {
+    display: none;
+    &.visible {
+      display: block;
+    }
   }
   &:hover {
     background-color: #3c3c3c;
