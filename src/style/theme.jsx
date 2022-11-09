@@ -3,13 +3,29 @@ export const darkTheme = {
     primary: "#1e1e1e",
     secondary: "#252526",
     third: "#333",
-    contentColor: "#1e1e1e",
+    contentColor: "#7a7a7a",
     header: "#3c3c3c",
     footer: "#007fd4",
     scroll: "#cecece",
     selected: "#505050",
     hover: "#3c3c3c",
     text: "white",
+    textTwo: "#7a7a7a",
+  },
+};
+
+export const lightTheme = {
+  color: {
+    primary: "#282a36",
+    secondary: "#191a21",
+    third: "#343746",
+    contentColor: "#cecece",
+    header: "#21222c",
+    footer: "pink",
+    scroll: "#cecece",
+    selected: "#505050",
+    hover: "#3c3c3c",
+    text: "#FF9199",
     textTwo: "#7a7a7a",
   },
 };

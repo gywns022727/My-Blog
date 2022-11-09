@@ -1,6 +1,7 @@
 export const getPostOne = (postData, path) => {
   const pathArr = path.split("/").filter(Boolean);
   const data = pathArr.reduce((sum, current, index) => {
+    if (!path) return false;
     const lastPath = pathArr.length - 1 === index;
 
     const target = sum.find(
