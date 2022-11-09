@@ -108,7 +108,7 @@ export default function Main() {
         </LeftContent>
       )}
       <RightWrap selected={selected}>
-        <RightHeader>
+        <RightHeader visible={openPost.length !== 0 ? true : false}>
           {openPost.map((one, index) => {
             const data = getPostOne(postData, one);
             return (
@@ -255,7 +255,7 @@ const RightWrap = styled.div`
 const RightHeader = styled.div`
   width: 100%;
   height: 40px;
-  display: flex;
+  display: ${({ visible }) => (visible ? "flex" : "none")};
   overflow-y: hidden;
   overflow-x: scroll;
   background-color: ${({ theme }) => theme.color.secondary};
