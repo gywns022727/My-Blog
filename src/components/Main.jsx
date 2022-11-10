@@ -138,7 +138,10 @@ export default function Main() {
             );
           })}
         </RightHeader>
-        <RightContent>
+        <RightContent
+          selected={selected}
+          visible={openPost.length !== 0 ? true : false}
+        >
           {(() => {
             const data = getPostOne(postData, selectedPost);
             return (
@@ -304,7 +307,7 @@ const RightHeader = styled.div`
 
 const RightContent = styled.div`
   width: 100%;
-  height: calc(100% - 50px);
+  height: ${({ visible }) => (visible ? "calc(100% - 50px)" : "100%")};
   background-color: ${({ theme }) => theme.color.primary};
   padding: 10px 20px;
   display: flex;
