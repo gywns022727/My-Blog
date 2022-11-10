@@ -13,6 +13,8 @@ import Content from "./Content";
 import AppContext from "../context/AppContext";
 import { getPostOne } from "../common/common.function";
 import PostWrap from "./PostWrap";
+import remarkGfm from "remark-gfm";
+import ReactMarkdown from "react-markdown";
 
 export default function Main() {
   const [selected, setSelected] = useState(null);
@@ -154,11 +156,16 @@ export default function Main() {
                       <strong>Hyojun</strong> | {data.data?.date}
                     </p>
                     <div>
-                      {data.data?.tag.map((one, indek) => (
+                      {data.data?.tag?.map((one, indek) => (
                         <span key={indek}>{one}</span>
                       ))}
                     </div>
-                    <div>{data.data?.content}</div>
+                    <div>
+                      <ReactMarkdown
+                        children={data.data?.content}
+                        remarkPlugins={[remarkGfm]}
+                      />
+                    </div>
                   </div>
                 </>
               )
@@ -183,7 +190,6 @@ const LeftBar = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* align-items: center; */
   > div:last-child {
     padding-bottom: 100px;
     display: flex;
@@ -275,11 +281,13 @@ const RightHeader = styled.div`
     font-size: 16px;
     text-align: center;
     line-height: 15px;
-    /* text-overflow: ellipsis; */
     user-select: none;
     cursor: pointer;
     position: relative;
-    padding: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 10px 40px 10px 20px;
     background-color: ${({ theme }) => theme.color.third};
     border-right: 1px solid ${({ theme }) => theme.color.third};
     &.selected {
