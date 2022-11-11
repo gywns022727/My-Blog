@@ -15,6 +15,8 @@ import { getPostOne } from "../common/common.function";
 import PostWrap from "./PostWrap";
 import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 export default function Main() {
   const [selected, setSelected] = useState(null);
@@ -160,10 +162,36 @@ export default function Main() {
                         <span key={indek}>{one}</span>
                       ))}
                     </div>
-                    <div>
+                    <div className="markdown">
                       <ReactMarkdown
                         children={data.data?.content}
                         remarkPlugins={[remarkGfm]}
+                        components={{
+                          code({
+                            node,
+                            inline,
+                            className,
+                            children,
+                            ...props
+                          }) {
+                            const match = /language-(\w+)/.exec(
+                              className || ""
+                            );
+                            return !inline && match ? (
+                              <SyntaxHighlighter
+                                children={String(children).replace(/\n$/, "")}
+                                style={dracula}
+                                language={match[1]}
+                                PreTag="div"
+                                {...props}
+                              />
+                            ) : (
+                              <code className={className} {...props}>
+                                {children}
+                              </code>
+                            );
+                          },
+                        }}
                       />
                     </div>
                   </div>
@@ -321,6 +349,7 @@ const RightContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: scroll;
   > p {
     width: 100%;
     color: ${({ theme }) => theme.color.textTwo};
@@ -328,6 +357,7 @@ const RightContent = styled.div`
   > div {
     max-width: 800px;
     width: 100%;
+    padding: 20px;
     > h1 {
       padding: 10px 0 20px 0;
     }
@@ -344,6 +374,13 @@ const RightContent = styled.div`
         padding: 5px 10px;
         border-radius: 10px;
         background-color: ${({ theme }) => theme.color.selected};
+      }
+    }
+
+    > div:last-child.markdown {
+      h1 {
+        color: pink;
+        padding: 10px 0 30px 0;
       }
     }
   }

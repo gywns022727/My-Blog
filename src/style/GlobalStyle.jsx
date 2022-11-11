@@ -23,7 +23,7 @@ code {
 }
 
 *::-webkit-scrollbar {
-    width: 5px;
+    width: 10px;
     height: 5px;
     /* 스크롤바의 너비 */
 }
