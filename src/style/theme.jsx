@@ -16,7 +16,7 @@ export const darkTheme = {
 
 export const lightTheme = {
   color: {
-    primary: "#282a36",
+    primary: "#282a37",
     secondary: "#191a21",
     third: "#343746",
     contentColor: "#cecece",
@@ -24,7 +24,7 @@ export const lightTheme = {
     footer: "pink",
     scroll: "#cecece",
     selected: "#505050",
-    hover: "#3c3c3c",
+    hover: "#2b2b2b",
     text: "#FF9199",
     textTwo: "#7a7a7a",
   },

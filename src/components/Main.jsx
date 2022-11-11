@@ -17,6 +17,7 @@ import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import Search from "./pages/Search";
 
 export default function Main() {
   const [selected, setSelected] = useState(null);
@@ -61,7 +62,7 @@ export default function Main() {
     {
       icon: <VscSearch size={32} />,
       path: "SEARCH",
-      content: <Accordion title="Tags">text</Accordion>,
+      content: <Search />,
     },
     {
       icon: <VscSourceControl size={32} />,
