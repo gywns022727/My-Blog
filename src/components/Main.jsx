@@ -116,7 +116,7 @@ export default function Main() {
       )}
       <RightWrap selected={selected}>
         {selectedTag ? (
-          <>{selected}</>
+          <RightTagContent>{JSON.stringify(selectedTag)}</RightTagContent>
         ) : (
           <>
             <RightHeader visible={openPost.length !== 0 ? true : false}>
@@ -343,6 +343,17 @@ const RightHeader = styled.div`
       right: 15px;
     }
   }
+`;
+
+const RightTagContent = styled.div`
+  width: 100%;
+  height: 100%;
+  background-color: ${({ theme }) => theme.color.primary};
+  padding: 10px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
 `;
 
 const RightContent = styled.div`

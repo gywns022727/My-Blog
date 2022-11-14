@@ -22,11 +22,13 @@ export default function Search() {
             const tempTarget = tempArr.find((temp) => tag === temp.tagTitle);
             if (tempTarget) {
               tempTarget.count += 1;
+              tempTarget.postArr.push(nowPostData.path);
+              tempTarget.postArr = [...new Set(tempTarget.postArr)];
             } else {
               tempArr.push({
                 tagTitle: tag,
                 count: 1,
-                postArr: [],
+                postArr: [nowPostData.paht],
               });
             }
           });
@@ -35,7 +37,6 @@ export default function Search() {
         }
       });
     }
-
     setTagData(tempArr);
   }, [postData]);
 
@@ -46,7 +47,10 @@ export default function Search() {
           <Tag
             key={index}
             onClick={() => {
-              setSelectedTag(one.tagTitle);
+              setSelectedTag({
+                tagTitle: one.tagTitle,
+                path: [],
+              });
             }}
           >
             {one.tagTitle} <span>{one.count}</span>
