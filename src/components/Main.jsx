@@ -29,6 +29,7 @@ export default function Main() {
     selectedPost,
     postData,
     openPost,
+    selectedTag,
   } = useContext(AppContext);
 
   const listArr = [
@@ -81,6 +82,7 @@ export default function Main() {
     },
   ];
 
+  const data = getPostOne(postData, selectedPost);
   return (
     <Wrap>
       <LeftBar>
@@ -113,44 +115,45 @@ export default function Main() {
         </LeftContent>
       )}
       <RightWrap selected={selected}>
-        <RightHeader visible={openPost.length !== 0 ? true : false}>
-          {openPost.map((one, index) => {
-            const data = getPostOne(postData, one);
-            return (
-              <div
-                className={selectedPost === one ? "selected" : ""}
-                onClick={() => {
-                  setSelectedPost(data.path);
-                }}
-                key={index}
-              >
-                📝{data.title}
-                <span
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const openPostFilter = openPost.filter(
-                      (one) => one !== data.path
-                    );
-                    setOpenPost(openPostFilter);
-                    setSelectedPost(
-                      openPostFilter.length !== 0 ? openPostFilter[0] : null
-                    );
-                  }}
-                >
-                  <VscChromeClose />
-                </span>
-              </div>
-            );
-          })}
-        </RightHeader>
-        <RightContent
-          selected={selected}
-          visible={openPost.length !== 0 ? true : false}
-        >
-          {(() => {
-            const data = getPostOne(postData, selectedPost);
-            return (
-              data && (
+        {selectedTag ? (
+          <>{selected}</>
+        ) : (
+          <>
+            <RightHeader visible={openPost.length !== 0 ? true : false}>
+              {openPost.map((one, index) => {
+                const data = getPostOne(postData, one);
+                return (
+                  <div
+                    className={selectedPost === one ? "selected" : ""}
+                    onClick={() => {
+                      setSelectedPost(data.path);
+                    }}
+                    key={index}
+                  >
+                    📝{data.title}
+                    <span
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const openPostFilter = openPost.filter(
+                          (one) => one !== data.path
+                        );
+                        setOpenPost(openPostFilter);
+                        setSelectedPost(
+                          openPostFilter.length !== 0 ? openPostFilter[0] : null
+                        );
+                      }}
+                    >
+                      <VscChromeClose />
+                    </span>
+                  </div>
+                );
+              })}
+            </RightHeader>
+            <RightContent
+              selected={selected}
+              visible={openPost.length !== 0 ? true : false}
+            >
+              {data && (
                 <>
                   <p>{data.path?.replaceAll("/", " >")}</p>
                   <div>
@@ -197,10 +200,10 @@ export default function Main() {
                     </div>
                   </div>
                 </>
-              )
-            );
-          })()}
-        </RightContent>
+              )}
+            </RightContent>
+          </>
+        )}
       </RightWrap>
     </Wrap>
   );

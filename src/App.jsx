@@ -18,10 +18,11 @@ const router = createBrowserRouter(
 );
 
 function App() {
+  const [theme, setTheme] = useState("dark");
+  const [selectedTag, setSelectedTag] = useState(null);
   const [selectedPost, setSelectedPost] = useState("");
   const [postData, setPostData] = useState([]);
   const [openPost, setOpenPost] = useState([]);
-  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
     async function fetch() {
@@ -44,6 +45,8 @@ function App() {
         postData: postData,
         theme: theme,
         setTheme: setTheme,
+        selectedTag: selectedTag,
+        setSelectedTag: setSelectedTag,
       }}
     >
       <ThemeProvider theme={theme === "dark" ? darkTheme : lightTheme}>

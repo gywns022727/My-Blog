@@ -5,44 +5,8 @@ import { useContext } from "react";
 import AppContext from "../../context/AppContext";
 
 export default function Search() {
-  const { postData } = useContext(AppContext);
-  const [tagDate, setTagData] = useState([
-    {
-      tageTitle: "Tech",
-      count: 3,
-      postArr: [],
-    },
-    {
-      tageTitle: "일상",
-      count: 3,
-      postArr: [],
-    },
-    {
-      tageTitle: "일상asd",
-      count: 3,
-      postArr: [],
-    },
-    {
-      tageTitle: "일상asd",
-      count: 3,
-      postArr: [],
-    },
-    {
-      tageTitle: "일상ssss",
-      count: 3,
-      postArr: [],
-    },
-    {
-      tageTitle: "일상adadsasd",
-      count: 3,
-      postArr: [],
-    },
-    {
-      tageTitle: "일상asd",
-      count: 3,
-      postArr: [],
-    },
-  ]);
+  const { postData, setSelectedTag } = useContext(AppContext);
+  const [tagDate, setTagData] = useState([]);
 
   useEffect(() => {
     const tempArr = [];
@@ -79,7 +43,12 @@ export default function Search() {
     <Accordion title="Tags" initialExpanded={true}>
       <TagWrap>
         {tagDate.map((one, index) => (
-          <Tag key={index}>
+          <Tag
+            key={index}
+            onClick={() => {
+              setSelectedTag(one.tagTitle);
+            }}
+          >
             {one.tagTitle} <span>{one.count}</span>
           </Tag>
         ))}

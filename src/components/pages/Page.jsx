@@ -16,8 +16,8 @@ export default function Page() {
 
 const Wrap = styled.div`
   width: 100vw;
-  height: 100vh;
-  overflow-x: hidden;
+  height: 97vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 `;
