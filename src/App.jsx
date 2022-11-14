@@ -29,7 +29,6 @@ function App() {
       const { data: responsePostData } = await axios.get(
         "http://localhost:4000/post/all"
       );
-      console.log(responsePostData);
       setPostData(responsePostData);
     }
     fetch();

@@ -28,7 +28,7 @@ export default function Search() {
               tempArr.push({
                 tagTitle: tag,
                 count: 1,
-                postArr: [nowPostData.paht],
+                postArr: [nowPostData.path],
               });
             }
           });
@@ -49,7 +49,7 @@ export default function Search() {
             onClick={() => {
               setSelectedTag({
                 tagTitle: one.tagTitle,
-                path: [],
+                path: one.postArr,
               });
             }}
           >

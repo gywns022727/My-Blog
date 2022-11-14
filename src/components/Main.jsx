@@ -41,7 +41,6 @@ export default function Main() {
           <Accordion title="OPEN POSTS" isBold={true} initialExpanded={true}>
             {openPost.map((one, index) => {
               const data = getPostOne(postData, one);
-
               return (
                 <PostWrap
                   path={data.path}
@@ -116,7 +115,19 @@ export default function Main() {
       )}
       <RightWrap selected={selected}>
         {selectedTag ? (
-          <RightTagContent>{JSON.stringify(selectedTag)}</RightTagContent>
+          <RightTagContent>
+            <h2>
+              {selectedTag.tagTitle} 관련 글 목록{" "}
+              <span>({selectedTag.path.length}</span> 개)
+            </h2>
+            <div>
+              {selectedTag.path.map((path, index) => {
+                const tagData = getPostOne(postData, path);
+
+                return <div key={index}>{tagData.title}</div>;
+              })}
+            </div>
+          </RightTagContent>
         ) : (
           <>
             <RightHeader visible={openPost.length !== 0 ? true : false}>
