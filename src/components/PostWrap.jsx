@@ -22,6 +22,7 @@ export default function PostWrap({ path, title, isClose }) {
     >
       <span
         className={isClose && selectedPost === path ? "visible" : ""}
+        isClose={isClose}
         onClick={(e) => {
           e.stopPropagation();
           const openPostFilter = openPost.filter((one) => one !== path);
@@ -49,7 +50,7 @@ const PostWrapStyled = styled.div`
     background-color: ${({ theme }) => theme.color.selected};
   }
   &:hover > span {
-    display: block;
+    display: ${({ isClose }) => (isClose ? "block" : "none")};
   }
   > span {
     display: none;

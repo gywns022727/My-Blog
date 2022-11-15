@@ -139,7 +139,9 @@ export default function Main() {
                       }}
                     >
                       <div>
-                        <div></div>
+                        <div>
+                          <img src={tagData.data.thumbnail} alt="thumbnail" />
+                        </div>
                         <h3>{tagData.title}</h3>
                       </div>
                       <div>
@@ -418,10 +420,17 @@ const RightTagContent = styled.div`
         > div:first-child {
           display: flex;
           > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 80px;
             height: 80px;
-            background-color: red;
+            background-color: ${({ theme }) => theme.color.primary};
             border-radius: 10px;
+            > img {
+              width: 60px;
+              height: 60px;
+            }
           }
           > h3 {
             padding-left: 10px;
